@@ -3,11 +3,12 @@ package com.dds.voip;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.widget.Toast;
+
+import com.blankj.utilcode.util.LogUtils;
+import com.dds.voip.callback.StateCallBack;
 
 /**
  * ***********************************************
@@ -21,10 +22,44 @@ import android.widget.Toast;
  * ***********************************************
  */
 public class SipHelper {
-
     private static SipHelper mInstance;
+    private StateCallBack stateCallBack;
 
     private SipHelper() {
+        stateCallBack = new StateCallBack() {
+            /**
+             * 来电话时
+             */
+            @Override
+            public void incomingReceived() {
+                LogUtils.i("SipHelper", "来电话时");
+            }
+
+            /**
+             * 电话接通时
+             */
+            @Override
+            public void streamsRunning() {
+                LogUtils.i("SipHelper", "电话接通时");
+            }
+
+            /**
+             * 电话挂断时
+             */
+            @Override
+            public void callEnd() {
+                LogUtils.i("SipHelper", "电话挂断时");
+            }
+
+            /**
+             * 出错时
+             */
+            @Override
+            public void callError() {
+                LogUtils.i("SipHelper", "出错时");
+            }
+        };
+        VoipUtil.setStateCallBack(stateCallBack);
     }
 
     public static SipHelper getInstance() {
@@ -150,5 +185,6 @@ public class SipHelper {
     public void call() {
         VoipUtil.outgoing(getActivity(), getOtherNumber(), false);
     }
+
 
 }

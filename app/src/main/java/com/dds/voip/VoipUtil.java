@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.dds.voip.callback.NarrowCallbackDefault;
+import com.dds.voip.callback.StateCallBack;
 import com.dds.voip.callback.VoipCallBack;
 import com.dds.voip.callback.VoipCallBackDefault;
 import com.trustmobi.voip.BuildConfig;
@@ -56,6 +57,7 @@ public class VoipUtil {
     public static void setBussinessCallback(VoipCallBack callBack) {
         VoipHelper.getInstance().setVoipCallBack(callBack);
     }
+
     //开启权限之后开启悬浮窗
     public static void openNarrow() {
         VoipHelper.getInstance().createNarrow();
@@ -63,5 +65,10 @@ public class VoipUtil {
 
     public static boolean isIncall(Context context) {
         return VoipHelper.getInstance().isInCall(context);
+    }
+
+    //设置状态的回调
+    public static void setStateCallBack(StateCallBack callBack) {
+        VoipHelper.getInstance().setStateCallBack(callBack);
     }
 }

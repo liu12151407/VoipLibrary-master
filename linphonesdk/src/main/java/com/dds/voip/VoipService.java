@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.dds.tbs.linphonesdk.R;
 import com.dds.voip.bean.ChatInfo;
 import com.dds.voip.callback.NarrowCallback;
+import com.dds.voip.callback.StateCallBack;
 import com.dds.voip.callback.VoipCallBack;
 import com.dds.voip.callback.VoipCallBackDefault;
 
@@ -66,8 +67,7 @@ import static com.dds.voip.VoipActivity.VOIP_OUTGOING;
 public class VoipService extends Service {
     public static VoipService instance;
     private VoipCallBack callBack;
-
-
+    private StateCallBack stateCallBack;
     private NotificationManager mNM;
     public static final int NOTIFY_INCOMING = 100;
     public static final int NOTIFY_OUTGOING = 200;
@@ -90,6 +90,14 @@ public class VoipService extends Service {
 
     public VoipCallBack getCallBack() {
         return callBack;
+    }
+
+    public StateCallBack getStateCallBack() {
+        return stateCallBack;
+    }
+
+    public void setStateCallBack(StateCallBack stateCallBack) {
+        this.stateCallBack = stateCallBack;
     }
 
     private boolean isDebug = false;
@@ -192,6 +200,9 @@ public class VoipService extends Service {
                         String userId = remoteAddress.getUserName();
                         invisible = callBack.isContactVisible(userId);
                     }
+                    if(stateCallBack!=null) {
+                        stateCallBack.incomingReceived();
+                    }
                     if (invisible) {
                         if (!LinphoneManager.getInstance().getCallGsmON()) {
                             if (getLc().getCurrentCall().getDirection() == CallDirection.Incoming) {
@@ -203,11 +214,13 @@ public class VoipService extends Service {
                     } else {
                         getLc().declineCall(call, Reason.Busy);
                     }
-
                 }
 
                 //=================================电话接通时===================================================
                 if (LinphoneCall.State.StreamsRunning == state) {
+                    if(stateCallBack!=null) {
+                        stateCallBack.streamsRunning();
+                    }
                     VoipHelper.isInCall = true;
                     //设置通知栏
                     cancelNotification(NOTIFY_OUTGOING);
@@ -222,6 +235,9 @@ public class VoipService extends Service {
                 }
                 //=================================电话挂断时===================================================
                 if (state == LinphoneCall.State.CallEnd) {
+                    if(stateCallBack!=null) {
+                        stateCallBack.callEnd();
+                    }
                     terminateCall(call, message);
                     removeNarrow();
                     stopTimer();
@@ -235,6 +251,9 @@ public class VoipService extends Service {
 
                 //=================================出错时===================================================
                 if (state == LinphoneCall.State.Error) {
+                    if(stateCallBack!=null) {
+                        stateCallBack.callError();
+                    }
                     terminateErrorCall(call, message);
                     removeNarrow();
                     stopTimer();

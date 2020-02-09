@@ -105,16 +105,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (VoipUtil.isIncall(this)) {
-            ToastUtils.showShort("通话中");
-        } else {
-            ToastUtils.showShort("通话结束");
-            tv_info.setText("正在上传数据...");
-        }
-    }
 
     @Override
     protected void onDestroy() {
@@ -129,13 +119,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean dispatchKeyEvent(KeyEvent event) {
-//        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-//            //do something.
-//            return true;
-//        } else {
-//            return super.dispatchKeyEvent(event);
-//        }
-//    }
 }

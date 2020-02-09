@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.dds.tbs.linphonesdk.R;
 import com.dds.voip.bean.ChatInfo;
 import com.dds.voip.callback.NarrowCallback;
+import com.dds.voip.callback.StateCallBack;
 import com.dds.voip.callback.VoipCallBack;
 
 import org.linphone.core.LinphoneCall;
@@ -143,6 +144,13 @@ public class VoipHelper {
     public void setVoipCallBack(VoipCallBack callBack) {
         if (VoipService.isReady()) {
             VoipService.instance().setCallBack(callBack);
+        }
+    }
+
+    //设置状态的回调
+    public void setStateCallBack(StateCallBack callBack) {
+        if (VoipService.isReady()) {
+            VoipService.instance().setStateCallBack(callBack);
         }
     }
 
