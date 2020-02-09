@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.dds.voip.callback.StateCallBack;
 import com.trustmobi.voip.R;
 
 /**
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private Button bt_call;
     private Button bt_login;
     private TextView tv_info;
+
+    private StateCallBack stateCallBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,44 @@ public class MainActivity extends AppCompatActivity {
                 SipHelper.getInstance().call();
             }
         });
+        stateCallBack = new StateCallBack() {
+            /**
+             * 来电话时
+             */
+            @Override
+            public void incomingReceived() {
+                tv_info.setText("来电");
+                LogUtils.i("SipHelper", "来电话时");
+            }
+
+            /**
+             * 电话接通时
+             */
+            @Override
+            public void streamsRunning() {
+                tv_info.setText("通话中...");
+                LogUtils.i("SipHelper", "电话接通时");
+            }
+
+            /**
+             * 电话挂断时
+             */
+            @Override
+            public void callEnd() {
+                tv_info.setText("电话挂断");
+                LogUtils.i("SipHelper", "电话挂断时");
+            }
+
+            /**
+             * 出错时
+             */
+            @Override
+            public void callError() {
+                tv_info.setText("服务器异常");
+                LogUtils.i("SipHelper", "出错时");
+            }
+        };
+
         countDown();
     }
 
@@ -92,10 +134,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 tv_info.setText("服务器连接成功");
+                VoipUtil.setStateCallBack(stateCallBack);
                 SipHelper.getInstance().call();
             }
         }.start();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
