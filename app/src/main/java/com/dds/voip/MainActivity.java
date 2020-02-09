@@ -129,13 +129,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            //do something.
-            return true;
-        } else {
-            return super.dispatchKeyEvent(event);
-        }
-    }
+//    @Override
+//    public boolean dispatchKeyEvent(KeyEvent event) {
+//        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+//            //do something.
+//            return true;
+//        } else {
+//            return super.dispatchKeyEvent(event);
+//        }
+//    }
 }

@@ -24,10 +24,10 @@ public class VoipUtil {
     // 开启Voip服务
     public static void startService(Context context) {
         //设置输出日志
-        VoipHelper.getInstance().setDebug(BuildConfig.DEBUG);
+//        VoipHelper.getInstance().setDebug(BuildConfig.DEBUG);
+        VoipHelper.getInstance().setDebug(false);
         //开启Voip服务
         VoipHelper.getInstance().startVoip(context);
-
     }
 
     //登录服务器
