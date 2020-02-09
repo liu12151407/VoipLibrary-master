@@ -1,15 +1,15 @@
 ext {
 
     android = [
-            compileSdkVersion: 27,
-            buildToolsVersion: "27.0.3",
+            compileSdkVersion: 26,
+            buildToolsVersion: "26",
 
             minSdkVersion    : 16,
             targetSdkVersion : 26,
 
 
             dataBaseVersion  : "24",  //数据库版本号
-            VSupportSdk      : '27.0.0',
+            VSupportSdk      : '26.0.0',
             VOkhttp          : "3.4.1",
 
     ]
