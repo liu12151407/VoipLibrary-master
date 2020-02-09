@@ -21,8 +21,6 @@ import com.trustmobi.voip.BuildConfig;
 
 public class VoipUtil {
 
-    public static String serverUrl = "106.13.215.99:2088";
-
     // 开启Voip服务
     public static void startService(Context context) {
         //设置输出日志
@@ -33,7 +31,7 @@ public class VoipUtil {
     }
 
     //登录服务器
-    public static void login(String userId, String password) {
+    public static void login(String serverUrl, String userId, String password) {
         VoipHelper.getInstance().register(userId, password, serverUrl);
     }
 
@@ -46,7 +44,6 @@ public class VoipUtil {
     public static void stopService(Context context) {
         VoipHelper.getInstance().unRegister();
         VoipHelper.getInstance().stopVoip(context);
-
     }
 
     //设置开启悬浮窗的回调
