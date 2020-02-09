@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.dds.voip.callback.NarrowCallbackDefault;
 import com.dds.voip.callback.VoipCallBack;
+import com.dds.voip.callback.VoipCallBackDefault;
 import com.trustmobi.voip.BuildConfig;
 
 /**
@@ -55,7 +56,6 @@ public class VoipUtil {
     public static void setBussinessCallback(VoipCallBack callBack) {
         VoipHelper.getInstance().setVoipCallBack(callBack);
     }
-
     //开启权限之后开启悬浮窗
     public static void openNarrow() {
         VoipHelper.getInstance().createNarrow();

@@ -144,7 +144,6 @@ public class VoipHelper {
         if (VoipService.isReady()) {
             VoipService.instance().setCallBack(callBack);
         }
-
     }
 
     public ChatInfo getChatInfo() {
