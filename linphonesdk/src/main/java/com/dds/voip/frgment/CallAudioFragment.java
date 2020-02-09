@@ -51,7 +51,7 @@ import static com.dds.voip.VoipActivity.VOIP_INCOMING;
 
 public class CallAudioFragment extends Fragment implements View.OnClickListener {
 
-    private Button narrow_button;
+//    private Button narrow_button;
     private ImageView iv_background;
     private ImageView voip_voice_chat_avatar;
     private TextView voice_chat_friend_name;
@@ -92,7 +92,7 @@ public class CallAudioFragment extends Fragment implements View.OnClickListener 
     }
 
     private void initView(View rootView) {
-        narrow_button = rootView.findViewById(R.id.narrow_button);
+//        narrow_button = rootView.findViewById(R.id.narrow_button);
         voip_voice_chat_state_tips = rootView.findViewById(R.id.voip_voice_chat_state_tips);
         voip_voice_chat_avatar = rootView.findViewById(R.id.voip_voice_chat_avatar);
         voice_chat_friend_name = rootView.findViewById(R.id.voice_chat_friend_name);
@@ -100,9 +100,9 @@ public class CallAudioFragment extends Fragment implements View.OnClickListener 
 
         if (chatType == VOIP_INCOMING) {
             updateChatStateTips(getString(R.string.voice_chat_invite));
-            narrow_button.setVisibility(View.INVISIBLE);
+//            narrow_button.setVisibility(View.INVISIBLE);
         } else if (chatType == VOIP_CALL) {
-            narrow_button.setVisibility(View.VISIBLE);
+//            narrow_button.setVisibility(View.VISIBLE);
             voip_voice_chat_state_tips.setVisibility(View.INVISIBLE);
             LinphoneCall call = LinphoneManager.getLc().getCurrentCall();
             if (call != null) {
@@ -113,17 +113,17 @@ public class CallAudioFragment extends Fragment implements View.OnClickListener 
             }
         }
 
-        //设置narrow的位置
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int statusBarHeight = StatusBarCompat.getStatusBarHeight(getActivity());
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(narrow_button.getLayoutParams());
-            lp.setMargins(32, statusBarHeight + 32, 0, 0);
-            narrow_button.setLayoutParams(lp);
-        }
+//        //设置narrow的位置
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            int statusBarHeight = StatusBarCompat.getStatusBarHeight(getActivity());
+//            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(narrow_button.getLayoutParams());
+//            lp.setMargins(32, statusBarHeight + 32, 0, 0);
+//            narrow_button.setLayoutParams(lp);
+//        }
     }
 
     private void initListener() {
-        narrow_button.setOnClickListener(this);
+//        narrow_button.setOnClickListener(this);
 
     }
 
@@ -170,11 +170,11 @@ public class CallAudioFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        if (id == R.id.narrow_button) {
-            // 开启悬浮窗
-            incallActvityInstance.openNarrow();
-        }
+//        int id = v.getId();
+//        if (id == R.id.narrow_button) {
+//            // 开启悬浮窗
+//            incallActvityInstance.openNarrow();
+//        }
 
     }
 
@@ -199,9 +199,9 @@ public class CallAudioFragment extends Fragment implements View.OnClickListener 
 
 
     public void setNarrowVisible(boolean isVisible) {
-        if (narrow_button != null) {
-            narrow_button.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
-        }
+//        if (narrow_button != null) {
+//            narrow_button.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+//        }
 
     }
 
