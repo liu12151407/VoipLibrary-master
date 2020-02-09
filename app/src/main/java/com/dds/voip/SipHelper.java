@@ -26,40 +26,6 @@ public class SipHelper {
     private StateCallBack stateCallBack;
 
     private SipHelper() {
-        stateCallBack = new StateCallBack() {
-            /**
-             * 来电话时
-             */
-            @Override
-            public void incomingReceived() {
-                LogUtils.i("SipHelper", "来电话时");
-            }
-
-            /**
-             * 电话接通时
-             */
-            @Override
-            public void streamsRunning() {
-                LogUtils.i("SipHelper", "电话接通时");
-            }
-
-            /**
-             * 电话挂断时
-             */
-            @Override
-            public void callEnd() {
-                LogUtils.i("SipHelper", "电话挂断时");
-            }
-
-            /**
-             * 出错时
-             */
-            @Override
-            public void callError() {
-                LogUtils.i("SipHelper", "出错时");
-            }
-        };
-        VoipUtil.setStateCallBack(stateCallBack);
     }
 
     public static SipHelper getInstance() {
@@ -170,6 +136,41 @@ public class SipHelper {
      */
     public void login() {
         VoipUtil.login(getServerIP(), getSeatNumber(), getPassWord());
+
+        stateCallBack = new StateCallBack() {
+            /**
+             * 来电话时
+             */
+            @Override
+            public void incomingReceived() {
+                LogUtils.i("SipHelper", "来电话时");
+            }
+
+            /**
+             * 电话接通时
+             */
+            @Override
+            public void streamsRunning() {
+                LogUtils.i("SipHelper", "电话接通时");
+            }
+
+            /**
+             * 电话挂断时
+             */
+            @Override
+            public void callEnd() {
+                LogUtils.i("SipHelper", "电话挂断时");
+            }
+
+            /**
+             * 出错时
+             */
+            @Override
+            public void callError() {
+                LogUtils.i("SipHelper", "出错时");
+            }
+        };
+        VoipUtil.setStateCallBack(stateCallBack);
     }
 
     /**

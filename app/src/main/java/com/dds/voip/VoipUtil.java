@@ -6,8 +6,6 @@ import android.content.Context;
 import com.dds.voip.callback.NarrowCallbackDefault;
 import com.dds.voip.callback.StateCallBack;
 import com.dds.voip.callback.VoipCallBack;
-import com.dds.voip.callback.VoipCallBackDefault;
-import com.trustmobi.voip.BuildConfig;
 
 /**
  * ***********************************************
