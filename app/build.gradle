@@ -10,7 +10,6 @@ android {
         versionName "1.0"
         ndk{
             abiFilters 'armeabi-v7a'
-
         }
     }
     buildTypes {
@@ -26,4 +25,6 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation project(':linphonesdk')
+    //安卓工具类库
+    implementation 'com.blankj:utilcode:1.26.0'
 }

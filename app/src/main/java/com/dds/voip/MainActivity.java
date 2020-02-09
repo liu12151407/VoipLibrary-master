@@ -13,9 +13,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.dds.voip.bean.ChatInfo;
+import com.dds.voip.callback.VoipCallBack;
 import com.trustmobi.voip.R;
 
 import static com.dds.voip.VoipUtil.serverUrl;
+
 /**
  * ***********************************************
  * 包路径：com.dds.voip
@@ -102,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openVoip(View view) {
         VoipUtil.startService(this);
-
-
     }
 
     public void login(View view) {
@@ -131,6 +133,4 @@ public class MainActivity extends AppCompatActivity {
             VoipUtil.openNarrow();
         }
     }
-
-
 }

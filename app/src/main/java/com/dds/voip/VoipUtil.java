@@ -52,7 +52,6 @@ public class VoipUtil {
     //设置开启悬浮窗的回调
     public static void setNarrowCallBack(Activity activity) {
         VoipHelper.getInstance().setNarrowCallback(new NarrowCallbackDefault(activity));
-
     }
 
     //設置頭像和昵稱的回調
