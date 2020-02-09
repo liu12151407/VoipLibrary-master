@@ -315,10 +315,7 @@ public class VoipService extends Service {
                         callBack.terminateCall(isVideoEnable, userId, getString(R.string.voice_chat_time) + time);
                     }
                 }
-
-
             }
-
 
         } else if (call.getDirection() == CallDirection.Incoming) {
             //对方取消了或者自己长时间未接
