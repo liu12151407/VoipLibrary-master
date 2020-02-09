@@ -31,7 +31,9 @@ import com.trustmobi.voip.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button bt_server;
     private Button bt_call;
+    private Button bt_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,21 @@ public class MainActivity extends AppCompatActivity {
         SipHelper.getInstance().setActivity(this);
         SipHelper.getInstance().checkPermission();
         VoipUtil.setNarrowCallBack(this);
-        SipHelper.getInstance().open();
-
+        bt_server = findViewById(R.id.bt_server);
         bt_call = findViewById(R.id.bt_call);
+        bt_login = findViewById(R.id.bt_login);
+        bt_server.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SipHelper.getInstance().startService();
+            }
+        });
+        bt_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SipHelper.getInstance().login();
+            }
+        });
         bt_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -125,8 +125,14 @@ public class SipHelper {
     /**
      * 连接服务器
      */
-    public void open() {
+    public void startService() {
         VoipUtil.startService(getActivity());
+    }
+
+    /**
+     * 登录
+     */
+    public void login() {
         VoipUtil.login(getServerIP(), getSeatNumber(), getPassWord());
     }
 
