@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button bt_server;
     private Button bt_call;
     private Button bt_login;
+    private Button bt_test;
     private TextView tv_info;
 
     private StateCallBack stateCallBack;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         bt_server = findViewById(R.id.bt_server);
         bt_call = findViewById(R.id.bt_call);
         bt_login = findViewById(R.id.bt_login);
+        bt_test = findViewById(R.id.bt_test);
         tv_info = findViewById(R.id.tv_info);
         bt_server.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SipHelper.getInstance().call();
+            }
+        });
+        bt_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
             }
         });
         stateCallBack = new StateCallBack() {
@@ -100,8 +107,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        countDown();
+//        countDown();
     }
+
 
     /**
      * 倒计时
