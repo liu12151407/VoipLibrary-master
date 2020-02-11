@@ -2,6 +2,7 @@ package com.dds.voip;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
          * 开启服务
          */
         SipHelper.getInstance().startService();
+
         stateCallBack = new StateCallBack() {
 
             /**
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
              */
             @Override
             public void login(boolean isLogin) {
-                tv_info.setText(isLogin ? "登录成功" : "登录失败");
+                tv_info.setText(isLogin ? "登录成功" : "登录中...");
                 LogUtils.i("SipHelper", "登录状态：" + isLogin);
             }
 
@@ -119,45 +121,34 @@ public class MainActivity extends AppCompatActivity {
                 LogUtils.i("SipHelper", "出错时");
             }
         };
-        VoipUtil.setStateCallBack(stateCallBack);
+        countDown();
     }
 
-//
-//    /**
-//     * 倒计时
-//     */
-//    private CountDownTimer timer;
-//
-//    /**
-//     * 倒计时显示
-//     */
-//    private void countDown() {
-//        timer = new CountDownTimer(4000, 1000) {
-//            @Override
-//            public void onTick(long millisUntilFinished) {
-//                String crTime = millisUntilFinished / 1000 + "";
-//                switch (crTime) {
-//                    case "3":
-//                        SipHelper.getInstance().startService();
-//                        break;
-//                    case "1":
-//                        SipHelper.getInstance().login();
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                tv_info.setText("服务器连接中..." + crTime);
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                tv_info.setText("服务器连接成功");
-//                VoipUtil.setStateCallBack(stateCallBack);
-//                SipHelper.getInstance().call();
-//            }
-//        }.start();
-//    }
-//
+
+    /**
+     * 倒计时
+     */
+    private CountDownTimer timer;
+
+    /**
+     * 倒计时显示
+     */
+    private void countDown() {
+        timer = new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                String crTime = millisUntilFinished / 1000 + "";
+                tv_info.setText("服务器连接中..." + crTime);
+            }
+
+            @Override
+            public void onFinish() {
+                tv_info.setText("服务器连接成功");
+                VoipUtil.setStateCallBack(stateCallBack);
+            }
+        }.start();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

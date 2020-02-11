@@ -2,6 +2,7 @@ package com.dds.voip;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dds.tbs.linphonesdk.R;
@@ -151,6 +152,8 @@ public class VoipHelper {
     public void setStateCallBack(StateCallBack callBack) {
         if (VoipService.isReady()) {
             VoipService.instance().setStateCallBack(callBack);
+        }else {
+            Log.i("SipHelper", "服务未启动");
         }
     }
 
