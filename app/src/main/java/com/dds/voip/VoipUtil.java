@@ -6,6 +6,7 @@ import android.content.Context;
 import com.dds.voip.callback.NarrowCallbackDefault;
 import com.dds.voip.callback.StateCallBack;
 import com.dds.voip.callback.VoipCallBack;
+import com.trustmobi.voip.BuildConfig;
 
 /**
  * ***********************************************
@@ -24,8 +25,8 @@ public class VoipUtil {
     // 开启Voip服务
     public static void startService(Context context) {
         //设置输出日志
-//        VoipHelper.getInstance().setDebug(BuildConfig.DEBUG);
-        VoipHelper.getInstance().setDebug(false);
+        VoipHelper.getInstance().setDebug(BuildConfig.DEBUG);
+//        VoipHelper.getInstance().setDebug(false);
         //开启Voip服务
         VoipHelper.getInstance().startVoip(context);
     }

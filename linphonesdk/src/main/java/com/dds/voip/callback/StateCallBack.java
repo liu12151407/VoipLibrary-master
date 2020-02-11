@@ -13,6 +13,11 @@ package com.dds.voip.callback;
  */
 public interface StateCallBack {
     /**
+     * 是否登录成功
+     */
+    void login(boolean isLogin);
+
+    /**
      * 来电话时
      */
     void incomingReceived();

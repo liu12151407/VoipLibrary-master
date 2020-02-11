@@ -126,7 +126,6 @@ public class VoipService extends Service {
         if (isDebug) {
             displayCustomToast("open success");
         }
-
     }
 
     @Override
@@ -163,8 +162,14 @@ public class VoipService extends Service {
                     if (isDebug) {
                         displayCustomToast("login success");
                     }
+                    if (stateCallBack != null) {
+                        stateCallBack.login(true);
+                    }
                 } else {
                     LinLog.e("dds_voip", "login failed,message:" + smessage);
+                    if (stateCallBack != null) {
+                        stateCallBack.login(false);
+                    }
                 }
             }
 
@@ -200,7 +205,7 @@ public class VoipService extends Service {
                         String userId = remoteAddress.getUserName();
                         invisible = callBack.isContactVisible(userId);
                     }
-                    if(stateCallBack!=null) {
+                    if (stateCallBack != null) {
                         stateCallBack.incomingReceived();
                     }
                     if (invisible) {
@@ -218,7 +223,7 @@ public class VoipService extends Service {
 
                 //=================================电话接通时===================================================
                 if (LinphoneCall.State.StreamsRunning == state) {
-                    if(stateCallBack!=null) {
+                    if (stateCallBack != null) {
                         stateCallBack.streamsRunning();
                     }
                     VoipHelper.isInCall = true;
@@ -235,7 +240,7 @@ public class VoipService extends Service {
                 }
                 //=================================电话挂断时===================================================
                 if (state == LinphoneCall.State.CallEnd) {
-                    if(stateCallBack!=null) {
+                    if (stateCallBack != null) {
                         stateCallBack.callEnd();
                     }
                     terminateCall(call, message);
@@ -251,7 +256,7 @@ public class VoipService extends Service {
 
                 //=================================出错时===================================================
                 if (state == LinphoneCall.State.Error) {
-                    if(stateCallBack!=null) {
+                    if (stateCallBack != null) {
                         stateCallBack.callError();
                     }
                     terminateErrorCall(call, message);
@@ -424,7 +429,6 @@ public class VoipService extends Service {
         if (instance == null) return;
         if (getLc() != null) {
             LinphoneManager.getInstance().deleteAllAccount();
-
         }
     }
 
