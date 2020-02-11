@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.dds.voip.callback.StateCallBack;
 import com.trustmobi.voip.R;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_info;
 
     private StateCallBack stateCallBack;
+    private int tryNum = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         bt_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
         /**
@@ -83,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
             public void login(boolean isLogin) {
                 tv_info.setText(isLogin ? "登录成功" : "登录中...");
                 LogUtils.i("SipHelper", "登录状态：" + isLogin);
+                if (isLogin) {
+                    SipHelper.getInstance().call();
+                } else if (tryNum > 0) {
+                    tryNum--;
+                    SipHelper.getInstance().login();
+                } else {
+
+                }
             }
 
             /**
@@ -164,10 +175,10 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         try {
             SipHelper.getInstance().close();
-//            if (timer != null) {
-//                timer.cancel();
-//                timer = null;
-//            }
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
         } catch (Exception e) {
         }
     }
